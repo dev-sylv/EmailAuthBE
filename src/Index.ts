@@ -2,18 +2,18 @@ import express, { Application, Request, Response } from "express";
 // import { DBCONNECTION } from "./Config/Database";
 
 // import { EnvironmentVariables } from "./Config/EnvironmentVariables";
-// import { AppConfig } from "./MainApp";
+import { AppConfig } from "./MainApp";
 
 // const port = EnvironmentVariables.PORT;
 const port = 3445;
 
 const app: Application = express();
-// AppConfig(app);
+AppConfig(app);
 // DBCONNECTION();
 
 app.get("/", (req: Request, res: Response) => {
   return res.status(200).json({
-    message: "API READY FOR DIRTY ONLINE PROJECT",
+    message: "API READY FOR EMAIL AUTHENTICATION",
   });
 });
 const server = app.listen(port, () => {

@@ -161,3 +161,37 @@ export const SignInCompany = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+// Forget your password:
+export const ForgetComapnyPassword = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { email, password } = req.body;
+    const companies = await companyModel.findOne({ email });
+
+    if (companies) {
+      if (password === companies?.password) {
+        if (companies?.verified && companies?.token === "") {
+          res.status(200).json({
+            message: "Welcome back",
+            data: companies,
+          });
+        } else {
+          res.status(400).json({
+            message: "Account not verified",
+          });
+        }
+      } else {
+        res.status(400).json({
+          message: "User Email Error",
+        });
+      }
+    } else {
+      res.status(400).json({
+        message: "User Password Error",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

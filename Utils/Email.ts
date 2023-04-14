@@ -48,3 +48,39 @@ export const companyEmailVerification = async (companies: any) => {
     console.log(error);
   }
 };
+
+// Password reset email verification:
+export const CompanyEmailPasswordReset = async (companies: any) => {
+  try {
+    const access_token: any = (await oAuth.getAccessToken()).token;
+
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "peterotunuya2@gmail.com",
+        clientId: GOOGLE_ID,
+        clientSecret: GOOGLE_SECRET,
+        refreshToken: GOOGLE_REFRESHTOKEN,
+        // accessToken: getToken,
+        accessToken: access_token,
+      },
+    });
+    const { RCNumber, name, OTP } = companies;
+    const readEJS = path.join(__dirname, "../views/body.ejs");
+    const data = await ejs.renderFile(readEJS, { RCNumber, name, OTP });
+
+    const mailOption = {
+      from: "verify your Account ",
+      to: companies?.email,
+      subject: "Account Verification",
+      html: data,
+    };
+
+    transport.sendMail(mailOption).then(() => {
+      console.log("sent");
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -98,6 +98,63 @@ export const VerifyCompany = async (req: Request, res: Response) => {
     const { id } = req.params;
     const companies = await companyModel.findById(id);
 
+    if (companies!.token !== "") {
+      const company = await companyModel.findByIdAndUpdate(
+        id,
+        {
+          token: "",
+          verified: true,
+        },
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        message: "companies",
+        data: company,
+      });
+    } else {
+      res.status(400).json({
+        message: "An error occured in verification",
+      });
+    }
+
+    res.status(200).json({
+      message: "companies",
+      data: companies,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Sign in a comapny:
+export const SignInCompany = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const companies = await companyModel.findById(id);
+
+    if (companies!.token !== "") {
+      const company = await companyModel.findByIdAndUpdate(
+        id,
+        {
+          token: "",
+          verified: true,
+        },
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        message: "companies",
+        data: company,
+      });
+    } else {
+      res.status(400).json({
+        message: "An error occured in verification",
+      });
+    }
+
     res.status(200).json({
       message: "companies",
       data: companies,

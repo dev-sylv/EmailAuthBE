@@ -6,6 +6,11 @@ import morgan from "morgan";
 
 import ejs from "ejs";
 
+const data = {
+  name: "Peter",
+  matID: "33345",
+};
+
 export const AppConfig = (app: Application) => {
   app.set("view engine", "ejs");
   app.use(express.json());
@@ -16,7 +21,7 @@ export const AppConfig = (app: Application) => {
   app.use(morgan("dev"));
 
   app.get("/view", (req: Request, res: Response) => {
-    res.render("index");
+    res.render("index", { data });
   });
   app.get("/", (req: Request, res: Response) => {
     res.json({

@@ -29,3 +29,35 @@ export const getCompany = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const updateCompany = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const companies = await companyModel.findByIdAndUpdate(
+      id,
+      {},
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "companies",
+      data: companies,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCompany = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const companies = await companyModel.findByIdAndDelete(id);
+
+    res.status(200).json({
+      message: "companies",
+      data: companies,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

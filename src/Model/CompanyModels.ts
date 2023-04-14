@@ -15,31 +15,33 @@ interface iCompanyData extends iCompany, mongoose.Document {}
 
 const CompanyModel = new mongoose.Schema(
   {
-    userName: {
+    name: {
       type: String,
-    },
-    email: {
-      type: String,
-      unique: true,
     },
     password: {
       type: String,
     },
-    token: {
+    email: {
       type: String,
     },
     OTP: {
       type: String,
     },
-    StaffID: {
+    RCNumber: {
       type: String,
     },
-    CompanyNumber: {
+    token: {
       type: String,
     },
     verified: {
       type: Boolean,
     },
+    staff: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
+      },
+    ],
   },
   { timestamps: true }
 );

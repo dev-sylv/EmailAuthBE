@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import companyModel from "../model/companyModel";
+import companyModel from "../Model/CompanyModels";
 import crypto from "crypto";
-import { companyEmailVerification } from "../utils/email";
+import { companyEmailVerification } from "../../Utils/Email";
 
 export const getCompanies = async (req: Request, res: Response) => {
   try {

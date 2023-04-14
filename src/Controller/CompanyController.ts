@@ -91,3 +91,18 @@ export const createCompany = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+// Verify a company:
+export const VerifyCompany = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const companies = await companyModel.findById(id);
+
+    res.status(200).json({
+      message: "companies",
+      data: companies,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

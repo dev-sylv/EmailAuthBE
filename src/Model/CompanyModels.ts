@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface iUser {
+interface iCompany {
   userName: string;
   email: string;
   password: string;
@@ -11,9 +11,9 @@ interface iUser {
   StaffID: string;
 }
 
-interface iUserData extends iUser, mongoose.Document {}
+interface iCompanyData extends iCompany, mongoose.Document {}
 
-const userModel = new mongoose.Schema(
+const CompanyModel = new mongoose.Schema(
   {
     userName: {
       type: String,
@@ -44,4 +44,4 @@ const userModel = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<iUserData>("users", userModel);
+export default mongoose.model<iCompanyData>("company", CompanyModel);

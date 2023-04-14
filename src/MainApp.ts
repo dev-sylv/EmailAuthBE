@@ -5,6 +5,7 @@ import cors from "cors";
 import morgan from "morgan";
 
 import ejs from "ejs";
+import router from "./Routes/CompanyRoutes";
 
 const data = {
   name: "Peter",
@@ -19,6 +20,7 @@ export const AppConfig = (app: Application) => {
   app.use(express.static(`${__dirname} public/asset`));
   app.use(cors());
   app.use(morgan("dev"));
+  app.use("/api", router);
 
   app.get("/view", (req: Request, res: Response) => {
     res.render("index", { data });
